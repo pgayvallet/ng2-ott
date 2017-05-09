@@ -1,0 +1,31 @@
+{
+    "compileOnSave": false,
+    "buildOnSave": false,
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noImplicitAny": false,
+        "removeComments": false,
+        "sourceMap": false,
+        "inlineSourceMap": true,
+        "noEmitHelpers": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "types":[
+            "node",
+            "jasmine",
+            "core-js"
+        ],
+        "lib" : [
+            "es2017",
+            "dom"
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
