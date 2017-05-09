@@ -27,3 +27,4 @@ import '@angular/http';
 import '@angular/platform-browser';
 import '@angular/router';
 import 'ramda';
+import 'highcharts';
