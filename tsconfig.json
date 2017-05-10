@@ -5,6 +5,7 @@
         "target": "es5",
         "module": "commonjs",
         "moduleResolution": "node",
+        "skipLibCheck" : true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noImplicitAny": false,

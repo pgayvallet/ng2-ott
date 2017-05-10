@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 
 import { EditableCellComponent } from "./editable-cell.component";
+import { CoreChartModule } from "./chart/CoreChartModule";
 
 @NgModule({
-    imports: [],
+    imports: [
+        CoreChartModule
+    ],
     declarations: [
         EditableCellComponent,
     ],
