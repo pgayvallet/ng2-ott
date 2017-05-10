@@ -1,3 +1,14 @@
 <div class="sp-market-history-table">
-    Market history table !
+    <div class="sp-table">
+        <div class="sp-table-row" *ngFor="let stockName of stockNames">
+            <div class="sp-table-cell">
+                <span>{{stockName}}</span>
+            </div>
+            <div class="sp-table-cell" *ngFor="let entry of history; let i = index;">
+                <sp-editable-cell [value]="entry.stocks[stockName]"
+                                  (onValueUpdated)="onCellEdition(stockName, i, $event)">
+                </sp-editable-cell>
+            </div>
+        </div>
+    </div>
 </div>

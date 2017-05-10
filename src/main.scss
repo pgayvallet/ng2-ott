@@ -4,7 +4,34 @@ body {
   background-color: blue;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 
 sp-highchart {
   display: block;
+}
+
+
+.sp-table {
+  display: table;
+  width: 100%;
+
+  .sp-table-row {
+    display: table-row;
+  }
+
+  .sp-table-cell {
+    display: table-cell;
+  }
+
+}
+
+
+.sp-editable-cell {
+  input {
+    width: 100%;
+    padding: 0.2em 0.3em;
+  }
 }

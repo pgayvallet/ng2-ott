@@ -15,32 +15,35 @@ import { MarketHistoryEntry } from "./market-history.model";
 })
 export class MarketHistoryChartComponent implements OnInit {
 
-    public chartConfig : Highcharts.Options;
-    public chartSeries : any = [];
+    chartConfig : Highcharts.Options;
+    chartSeries : any = [];
 
-    constructor(private state : MarketHistoryState) {
-        state.getHistory().subscribe(history => this.onHistoryChange(history));
+    constructor(private state : MarketHistoryState) {}
+
+    ngOnInit(): void {
+        this.state.getHistory().subscribe(history => this.onHistoryChange(history));
+        this.chartConfig = this.getChartConfig();
     }
 
     private onHistoryChange(history : MarketHistoryEntry[]) {
         let stockNames : string[] = _.keys(history[0].stocks);
         let series = [];
         stockNames.forEach(stockName => {
-           series.push({
-               name : stockName,
-               data : history.map(entry => {
-                   return {
+            series.push({
+                name : stockName,
+                data : history.map(entry => {
+                    return {
                         x : entry.timestamp,
                         y : entry.stocks[stockName]
-                   };
-               })
+                    };
+                })
             });
         });
         this.chartSeries = series;
     }
 
-    ngOnInit(): void {
-        this.chartConfig = {
+    private getChartConfig() : Highcharts.Options {
+        return {
             chart : {
                 type : "line",
                 width : null
