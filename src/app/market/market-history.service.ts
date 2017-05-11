@@ -12,7 +12,7 @@ export class MarketHistoryService {
 
     constructor (private http: Http) {}
 
-    getHistory() : Observable<MarketHistoryEntry[]> {
+    fetchHistory() : Observable<MarketHistoryEntry[]> {
         return this.http.get(this.serviceUrl)
             .map((res:Response) => _.takeRight(res.json(), 20))
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));

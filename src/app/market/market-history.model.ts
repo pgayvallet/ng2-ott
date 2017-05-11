@@ -2,5 +2,5 @@
 export interface MarketHistoryEntry {
     timestamp   : number
     index       : number
-    stocks      : {[key : string]:string}
+    stocks      : {[key : string]:number}
 }

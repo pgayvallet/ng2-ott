@@ -4,9 +4,9 @@
             <div class="sp-table-cell">
                 <span>{{stockName}}</span>
             </div>
-            <div class="sp-table-cell" *ngFor="let entry of history; let i = index;">
+            <div class="sp-table-cell" *ngFor="let entry of history; let i = index; trackBy: historyTrackByFn">
                 <sp-editable-cell [value]="entry.stocks[stockName]"
-                                  (onValueUpdated)="onCellEdition(stockName, i, $event)">
+                                  (onValueUpdated)="onCellEdition(stockName, entry.index, $event)">
                 </sp-editable-cell>
             </div>
         </div>

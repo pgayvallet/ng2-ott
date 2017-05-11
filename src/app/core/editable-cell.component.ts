@@ -18,7 +18,7 @@ export class EditableCellComponent {
 
     onBlur() {
         console.log("onBlur !");
-        this.onValueUpdated.emit(this.value);
+        this.onValueUpdated.emit(parseInt(this.value + ""));
     }
 
 }

@@ -1,6 +1,6 @@
 import {Component, Input, ElementRef, OnDestroy, DoCheck, OnChanges, SimpleChanges, SimpleChange} from '@angular/core';
 
-import * as Highchart from "highcharts";
+import * as Highcharts from "highcharts";
 
 // source : https://github.com/Bigous/ng2-highcharts/blob/master/src/ng2-highcharts.ts
 
@@ -10,11 +10,11 @@ import * as Highchart from "highcharts";
 })
 export class HighchartComponent implements OnDestroy, DoCheck, OnChanges {
 
-    @Input() options : Highchart.Options;
-    @Input() series : Highchart.IndividualSeriesOptions[];
+    @Input() options : Highcharts.Options;
+    @Input() series : Highcharts.IndividualSeriesOptions[];
 
     hostElement: ElementRef;
-    chart : Highchart.ChartObject;
+    chart : Highcharts.ChartObject;
 
     constructor(el: ElementRef) {
         this.hostElement = el;
@@ -29,7 +29,9 @@ export class HighchartComponent implements OnDestroy, DoCheck, OnChanges {
         let optionsChange : SimpleChange = changes["options"];
         let seriesChange : SimpleChange = changes["series"];
 
-        console.log("***ngOnChanges ->", optionsChange, seriesChange);
+        console.log("chart : ", optionsChange, seriesChange);
+
+        //console.log("***ngOnChanges ->", optionsChange, seriesChange);
         if(this.series == null || this.options == null) {
             return;
         }
@@ -38,9 +40,9 @@ export class HighchartComponent implements OnDestroy, DoCheck, OnChanges {
             this.chart.destroy();
         }
 
-        console.log("*** ->", this.options, this.series);
+        //console.log("*** ->", this.options, this.series);
 
-        let options : Highchart.Options = this.options;
+        let options : Highcharts.Options = this.options;
         if(options.chart == null) {
             options.chart = {};
         }
@@ -49,10 +51,10 @@ export class HighchartComponent implements OnDestroy, DoCheck, OnChanges {
         let series : any = this.series;
         options.series = series;
 
-        console.log("redraw ->", options);
+        //console.log("redraw ->", options);
 
 
-        this.chart = new Highchart.Chart(options);
+        this.chart = new Highcharts.Chart(options);
     }
 
     ngDoCheck(): void {
@@ -66,3 +68,36 @@ export class HighchartComponent implements OnDestroy, DoCheck, OnChanges {
     }
 
 }
+
+
+
+/*
+ var processSeries = function(chart, series) {
+ var ids = [];
+ if(series) {
+ ensureIds(series);
+
+ //Find series to add or update
+ _.each(series, function(s) {
+ ids.push(s.id);
+ var chartSeries = chart.get(s.id);
+ if(chartSeries) {
+ chartSeries.update(angular.copy(s), false);
+ } else {
+ chart.addSeries(angular.copy(s), false);
+ }
+ });
+ }
+
+ //Now remove any missing series
+ for(var i = chart.series.length - 1; i >= 0; i--) {
+ var s = chart.series[i];
+ if(s.options.id === defaultChartOptions.navigator.series.id) {
+ continue;
+ }
+ if(ids.indexOf(s.options.id) < 0) {
+ s.remove(false);
+ }
+ }
+ };
+ */

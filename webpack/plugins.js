@@ -2,7 +2,6 @@
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -14,10 +13,10 @@ const sourceMap = process.env.TEST
 
 const basePlugins = [
     new webpack.DefinePlugin({
-        __DEV__: process.env.NODE_ENV !== 'production',
-        __PRODUCTION__: process.env.NODE_ENV === 'production',
-        __TEST__: JSON.stringify(process.env.TEST || false),
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        __DEV__                 : process.env.NODE_ENV !== 'production',
+        __PRODUCTION__          : process.env.NODE_ENV === 'production',
+        __TEST__                : JSON.stringify(process.env.TEST || false),
+        'process.env.NODE_ENV'  : JSON.stringify(process.env.NODE_ENV)
     }),
     new HtmlWebpackPlugin({
         template: './src/index.html',
@@ -35,44 +34,39 @@ const basePlugins = [
             }
 
             return 0;
-        },
+        }
     }),
     new ExtractTextPlugin('styles.[contenthash].css'),
     new webpack.NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([
-        { from: 'src/assets', to: 'assets' },
+        { from: 'src/assets', to: 'assets' }
     ]),
     new webpack.LoaderOptionsPlugin({
         test: /\.css$/,
         options: {
-            postcss,
-        },
+            postcss
+        }
     }),
     new webpack.ContextReplacementPlugin(
-        /angular\/core\/(esm\/src|src)\/linker/, __dirname),
+        /angular\/core\/(esm\/src|src)\/linker/, __dirname)
 ].concat(sourceMap);
 
 const devPlugins = [
-    new StyleLintPlugin({
-        configFile: './.stylelintrc',
-        files: ['src/**/*.css'],
-        failOnError: false,
-    }),
 ];
 
 const prodPlugins = [
     new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
+        name: 'vendor'
     }),
     new webpack.optimize.UglifyJsPlugin({
         sourceMap: true,
         mangle: {
-            keep_fnames: true,
+            keep_fnames: true
         },
         compress: {
-            warnings: false,
-        },
-    }),
+            warnings: false
+        }
+    })
 ];
 
 module.exports = basePlugins

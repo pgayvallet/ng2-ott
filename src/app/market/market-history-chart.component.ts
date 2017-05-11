@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from "lodash";
+import * as Highcharts from "highcharts";
 
 import { MarketHistoryState } from "./market-history-state.service";
 import { MarketHistoryEntry } from "./market-history.model";
+
 
 
 @Component({
