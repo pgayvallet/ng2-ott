@@ -6,6 +6,7 @@ import { MarketHistoryEntry } from "./market-history.model";
 import { MarketHistoryService } from "./market-history.service";
 
 const FETCH_INTERVAL = 1000;
+const HISTORY_LENGTH = 20;
 
 /**
  * State for the market history page
@@ -76,7 +77,7 @@ export class MarketHistoryState {
     }
 
     private performFetch() : void {
-        this.historyService.fetchHistory().subscribe(history => this.processHistory(history));
+        this.historyService.fetchHistory(HISTORY_LENGTH).subscribe(history => this.processHistory(history));
     }
     
     private processHistory(history : MarketHistoryEntry[]) {
@@ -90,11 +91,10 @@ export class MarketHistoryState {
 
     private mergeHistories(oldHistory : MarketHistoryEntry[], newHistory : MarketHistoryEntry[]) : MarketHistoryEntry[] {
         let offset = _.first(newHistory).index - _.first(oldHistory).index;
-        if(offset >= 20) {
+        if(offset >= HISTORY_LENGTH) {
             return newHistory;
         }
-        // TODO : merge
-        let oldPart = _.takeRight(oldHistory, 20 - offset);
+        let oldPart = _.takeRight(oldHistory, HISTORY_LENGTH - offset);
         let newPart = _.takeRight(newHistory, offset);
         return oldPart.concat(newPart);
     }

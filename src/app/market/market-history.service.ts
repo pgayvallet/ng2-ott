@@ -13,9 +13,9 @@ export class MarketHistoryService {
 
     constructor (private http: Http) {}
 
-    fetchHistory() : Observable<MarketHistoryEntry[]> {
-        return this.http.get(this.serviceUrl, { search : searchParams({ count : 20 }) })
-            .map((res:Response) => _.takeRight(res.json(), 20))
+    fetchHistory(count : number) : Observable<MarketHistoryEntry[]> {
+        return this.http.get(this.serviceUrl, { search : searchParams({ count : count }) })
+            .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
