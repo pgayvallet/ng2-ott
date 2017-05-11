@@ -5,7 +5,7 @@ import * as _ from "lodash";
 import { MarketHistoryEntry } from "./market-history.model";
 import { MarketHistoryService } from "./market-history.service";
 
-const FETCH_INTERVAL = 5000; //1000;
+const FETCH_INTERVAL = 3000; //1000;
 
 /**
  * State for the market history page
