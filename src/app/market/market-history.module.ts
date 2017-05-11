@@ -9,6 +9,7 @@ import { MarketHistoryService } from "./market-history.service";
 import { MarketHistoryState } from "./market-history-state.service"
 import { MarketHistoryChartComponent } from './market-history-chart.component';
 import { MarketHistoryTableComponent } from "./market-history-table.component";
+import { MarketHistoryPageComponent } from "./market-history-page.component";
 
 @NgModule({
     imports: [
@@ -22,11 +23,12 @@ import { MarketHistoryTableComponent } from "./market-history-table.component";
         MarketHistoryState
     ],
     declarations: [
+        MarketHistoryPageComponent,
         MarketHistoryChartComponent,
         MarketHistoryTableComponent
     ],
-    bootstrap: [],
     exports : [
+        MarketHistoryPageComponent,
         MarketHistoryChartComponent,
         MarketHistoryTableComponent
     ]

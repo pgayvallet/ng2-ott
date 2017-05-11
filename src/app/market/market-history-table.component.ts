@@ -6,7 +6,7 @@ import { MarketHistoryEntry } from "./market-history.model";
 import {Subscription} from "rxjs/Rx";
 
 @Component({
-    selector: 'sp-market-history-table',
+    selector: 'mkt-history-table',
     templateUrl: './market-history-table.component.html',
 })
 export class MarketHistoryTableComponent implements OnInit, OnDestroy {

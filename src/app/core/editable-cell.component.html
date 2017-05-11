@@ -1,5 +1,6 @@
 <div class="sp-editable-cell">
     <input [(ngModel)]="value"
            (focus)="onFocus()"
+           (keydown)="onKeyDown($event)"
            (blur)="onBlur()"/>
 </div>

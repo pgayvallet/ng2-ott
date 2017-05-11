@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 
-import { MarketModule } from "./market/market.module";
+import { MarketModule } from "./market/market-history.module";
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -15,4 +15,4 @@ import { AppComponent } from './app.component';
     ],
     bootstrap: [ AppComponent ],
 })
-export class AppModule {     }
+export class AppModule {}

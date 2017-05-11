@@ -1,5 +1,6 @@
 import {Component, Input, ElementRef, OnDestroy, DoCheck, OnChanges, SimpleChanges, SimpleChange} from '@angular/core';
 
+import * as _ from "lodash";
 import * as Highcharts from "highcharts";
 
 // source : https://github.com/Bigous/ng2-highcharts/blob/master/src/ng2-highcharts.ts
@@ -25,36 +26,72 @@ export class HighchartComponent implements OnDestroy, DoCheck, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
 
+        let optionsChange = changes["options"] != null;
+        let seriesChange = changes["series"] != null;
 
-        let optionsChange : SimpleChange = changes["options"];
-        let seriesChange : SimpleChange = changes["series"];
-
-        console.log("chart : ", optionsChange, seriesChange);
-
+        //console.log("chart : ", optionsChange, seriesChange);
         //console.log("***ngOnChanges ->", optionsChange, seriesChange);
+
         if(this.series == null || this.options == null) {
             return;
         }
 
+        if(optionsChange || this.chart == null) {
+            this.createChart();
+        } else {
+            this.updateSeries();
+        }
+    }
+
+
+    private createChart() : void {
         if(this.chart != null) {
             this.chart.destroy();
         }
 
-        //console.log("*** ->", this.options, this.series);
+        console.log("createChart", this.series);
 
+        // injecting renderTo
         let options : Highcharts.Options = this.options;
         if(options.chart == null) {
             options.chart = {};
         }
         options.chart.renderTo = this.hostElement.nativeElement;
 
-        let series : any = this.series;
-        options.series = series;
-
-        //console.log("redraw ->", options);
-
+        // adding series
+        options.series = this.series;
 
         this.chart = new Highcharts.Chart(options);
+    }
+
+    private updateSeries() : void {
+
+        // console.log("updateSeries");
+
+        let ids = [];
+        let series = this.series;
+        let chart = this.chart;
+
+        // update or add existing or new series
+        _.each(series, function (s) {
+            ids.push(s.id);
+            let chartSeries = chart.get(s.id) as Highcharts.SeriesObject;
+            if (chartSeries) {
+                chartSeries.update(s, false);
+            } else {
+                chart.addSeries(s, false);
+            }
+        });
+
+        //Now remove any missing series
+        for (var i = chart.series.length - 1; i >= 0; i--) {
+            var s = chart.series[i];
+            if (ids.indexOf(s.options.id) < 0) {
+                s.remove(false);
+            }
+        }
+
+        chart.redraw(false);
     }
 
     ngDoCheck(): void {

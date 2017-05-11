@@ -8,7 +8,7 @@ import { MarketHistoryEntry } from "./market-history.model";
 
 
 @Component({
-    selector: 'sp-market-history-chart',
+    selector: 'mkt-history-chart',
     template: `
         <div class="market-history-chart">
             <sp-highchart [options]="chartConfig" [series]="chartSeries"></sp-highchart>
@@ -18,7 +18,7 @@ import { MarketHistoryEntry } from "./market-history.model";
 export class MarketHistoryChartComponent implements OnInit {
 
     chartConfig : Highcharts.Options;
-    chartSeries : any = [];
+    chartSeries : any;
 
     constructor(private state : MarketHistoryState) {}
 
@@ -32,6 +32,7 @@ export class MarketHistoryChartComponent implements OnInit {
         let series = [];
         stockNames.forEach(stockName => {
             series.push({
+                id   : stockName,
                 name : stockName,
                 data : history.map(entry => {
                     return {

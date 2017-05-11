@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { HighchartComponent } from "./HighchartComponent";
+import { HighchartComponent } from "./highchart.component";
 
 @NgModule({
     imports: [],

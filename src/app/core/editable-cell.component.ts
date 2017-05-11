@@ -1,4 +1,6 @@
 import {Component, Input, Output, EventEmitter } from '@angular/core';
+import {keyCodes} from "./utils/keyCodes";
+
 
 @Component({
     selector: 'sp-editable-cell',
@@ -14,6 +16,15 @@ export class EditableCellComponent {
 
     onFocus() {
         console.log("onFocus !");
+    }
+
+    onKeyDown($event) {
+        let key = $event.keyCode;
+        if(key === keyCodes.ESCAPE) {
+            // TODO
+
+        }
+
     }
 
     onBlur() {
