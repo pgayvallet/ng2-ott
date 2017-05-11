@@ -8,28 +8,52 @@ import {keyCodes} from "./utils/keyCodes";
 })
 export class EditableCellComponent {
 
-    @Input() value : number;
+    @Input() set value(value : number) {
+        this.originalValue = value.toString();
+        if(!this.editing) {
+            this.inputValue = this.originalValue;
+        }
+    };
+
     @Output() onValueUpdated : EventEmitter<number> = new EventEmitter<number>();
+
+    private originalValue : string;
+
+    editing : boolean = false;
+    inputValue : string = "";
 
     constructor() {
     }
 
     onFocus() {
-        console.log("onFocus !");
-    }
-
-    onKeyDown($event) {
-        let key = $event.keyCode;
-        if(key === keyCodes.ESCAPE) {
-            // TODO
-
-        }
-
+        this.editing = true;
     }
 
     onBlur() {
-        console.log("onBlur !");
-        this.onValueUpdated.emit(parseInt(this.value + ""));
+        this.editing = false;
+        this.emitValueChange();
+    }
+
+    onKeyDown($event : KeyboardEvent) {
+        switch($event.keyCode) {
+            case keyCodes.ESCAPE:
+                this.restoreValue();
+                break;
+            case keyCodes.ENTER:
+                this.emitValueChange();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private restoreValue() {
+        this.inputValue = this.originalValue;
+
+    }
+
+    private emitValueChange() {
+        this.onValueUpdated.emit(parseFloat(this.inputValue + ""));
     }
 
 }
