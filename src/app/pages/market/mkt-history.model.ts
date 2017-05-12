@@ -1,6 +1,6 @@
 
 
-export interface MarketStockValue {         // TODO : use, and adapt the history service to convert
+export interface MarketStockValues {
     original  : number,
     manual?   : number
 }
@@ -8,5 +8,5 @@ export interface MarketStockValue {         // TODO : use, and adapt the history
 export interface MarketHistoryEntry {
     timestamp   : number
     index       : number
-    stocks      : {[key : string]:number}
+    stocks      : {[key : string] : MarketStockValues}
 }

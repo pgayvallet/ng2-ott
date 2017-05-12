@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
 
-import { MarketPageModule } from "./pages/market/mkt-history-page.module";
+import { MarketPageModule } from "./pages/market/mkt-history.module";
 import { AppComponent } from './app.component';
 import { AppRoutes } from "./app.routes";
 

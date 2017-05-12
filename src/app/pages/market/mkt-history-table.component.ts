@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from "rxjs/Rx";
 import * as _ from "lodash";
 
-import { MarketHistoryState } from "./mkt-history-state.service";
+import { MarketHistoryService } from "./mkt-history.service";
 import { MarketHistoryEntry } from "./mkt-history.model";
 
 @Component({
@@ -16,7 +16,7 @@ export class MarketHistoryTableComponent implements OnInit, OnDestroy {
 
     private subscriptions : Subscription = new Subscription();
 
-    constructor(private state : MarketHistoryState) {}
+    constructor(private state : MarketHistoryService) {}
     
     ngOnInit(): void {
         this.subscriptions.add(this.state.subscribeToHistoryChanges(history => this.onHistoryChange(history)));

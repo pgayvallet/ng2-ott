@@ -5,8 +5,7 @@ import { FormsModule } from "@angular/forms";
 
 import { ChartModule } from "../../core/chart/chart.module";
 
-import { MarketHistoryService } from "./mkt-history.service";
-import { MarketHistoryState } from "./mkt-history-state.service"
+import { MarketHistoryService } from "./mkt-history.service"
 import { MarketHistoryChartComponent } from './mkt-history-chart.component';
 import { MarketHistoryTableComponent } from "./mkt-history-table.component";
 import { MarketHistoryPageComponent } from "./mkt-history-page.component";
@@ -22,8 +21,7 @@ import { MarketHistoryTableCellComponent } from "./mkt-history-table-cell.compon
         ChartModule
     ],
     providers : [
-        MarketHistoryService,
-        MarketHistoryState
+        MarketHistoryService
     ],
     declarations: [
         MarketHistoryPageComponent,

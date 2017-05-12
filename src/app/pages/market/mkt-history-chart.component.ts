@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as _ from "lodash";
 import * as Highcharts from "highcharts";
 
-import { MarketHistoryState } from "./mkt-history-state.service";
+import { MarketHistoryService } from "./mkt-history.service";
 import { MarketHistoryEntry } from "./mkt-history.model";
 import { Subscription } from "rxjs/Rx";
 
@@ -22,7 +22,7 @@ export class MarketHistoryChartComponent implements OnInit, OnDestroy {
 
     private subscriptions : Subscription = new Subscription();
 
-    constructor(private state : MarketHistoryState) {
+    constructor(private state : MarketHistoryService) {
     }
 
     ngOnInit() : void {
@@ -42,9 +42,10 @@ export class MarketHistoryChartComponent implements OnInit, OnDestroy {
                 id: stockName,
                 name: stockName,
                 data: history.map(entry => {
+                    let values = entry.stocks[stockName];
                     return {
                         x: entry.timestamp,
-                        y: entry.stocks[stockName]
+                        y: values.manual != null ? values.manual : values.original
                     };
                 })
             });

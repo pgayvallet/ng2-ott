@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { MarketHistoryState } from "./mkt-history-state.service";
+import { MarketHistoryService } from "./mkt-history.service";
 
 /**
  * Root component for the market history page.
@@ -11,7 +11,7 @@ import { MarketHistoryState } from "./mkt-history-state.service";
 })
 export class MarketHistoryPageComponent implements OnInit, OnDestroy {
 
-    constructor(private state : MarketHistoryState) {}
+    constructor(private state : MarketHistoryService) {}
     
     ngOnInit() : void {
         this.state.loadInitialIfRequired();
