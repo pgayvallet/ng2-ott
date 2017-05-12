@@ -1,9 +1,9 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from "rxjs/Rx";
 import * as _ from "lodash";
 
 import { MarketHistoryState } from "./market-history-state.service";
 import { MarketHistoryEntry } from "./market-history.model";
-import {Subscription} from "rxjs/Rx";
 
 @Component({
     selector: 'mkt-history-table',
@@ -18,18 +18,18 @@ export class MarketHistoryTableComponent implements OnInit, OnDestroy {
 
     constructor(private state : MarketHistoryState) {}
     
-    historyTrackByFn(index:number, entry:MarketHistoryEntry) {
-        return entry.index;    
-    }
-
     ngOnInit(): void {
-        this.subscriptions.add(this.state.getHistory().subscribe(history => this.onHistoryChange(history)));
+        this.subscriptions.add(this.state.subscribeToHistoryChanges(history => this.onHistoryChange(history)));
     }
 
     ngOnDestroy() : void {
         this.subscriptions.unsubscribe();
     }
 
+    historyTrackByFn(index:number, entry:MarketHistoryEntry) {
+        return entry.index;
+    }
+    
     onCellEdition(stockName : string, index : number, value : number) : void {
         this.state.updateStockValue(stockName, index, value);
     }

@@ -3,7 +3,7 @@ import { HttpModule } from "@angular/http";
 import { CommonModule } from '@angular/common';
 
 import { CoreModule } from "../core/core.module";
-import { CoreChartModule } from "../core/chart/CoreChartModule";
+import { CoreChartModule } from "../core/chart/core-chart.module";
 
 import { MarketHistoryService } from "./market-history.service";
 import { MarketHistoryState } from "./market-history-state.service"
@@ -28,9 +28,7 @@ import { MarketHistoryPageComponent } from "./market-history-page.component";
         MarketHistoryTableComponent
     ],
     exports : [
-        MarketHistoryPageComponent,
-        MarketHistoryChartComponent,
-        MarketHistoryTableComponent
+        MarketHistoryPageComponent
     ]
 })
 export class MarketModule {     }

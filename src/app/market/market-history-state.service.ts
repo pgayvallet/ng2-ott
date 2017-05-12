@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import {Observable} from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Rx';
 import * as _ from "lodash";
 
 import { MarketHistoryEntry } from "./market-history.model";
@@ -8,8 +8,12 @@ import { MarketHistoryService } from "./market-history.service";
 const FETCH_INTERVAL = 1000;
 const HISTORY_LENGTH = 20;
 
+export interface HistoryChangeHandler {
+    (history : MarketHistoryEntry[]) : void
+}
+
 /**
- * State for the market history page
+ * State/Manager for the market history page.
  */
 @Injectable()
 export class MarketHistoryState {
@@ -19,10 +23,19 @@ export class MarketHistoryState {
     private bus : EventEmitter<MarketHistoryEntry[]> = new EventEmitter<MarketHistoryEntry[]>();
 
     private history : MarketHistoryEntry[];
-    
+
+    private _timeoutId : number;
+
     constructor (private historyService : MarketHistoryService) {
-        this.performFetch();
-        this.enableRealTime();
+    }
+
+    /**
+     * Load the current history from server if not already loaded.
+     */
+    loadInitialIfRequired() : void {
+        if(this.history == null) {
+            this.performFetch();
+        }
     }
 
     /**
@@ -42,36 +55,49 @@ export class MarketHistoryState {
             return false;
         }
     }
-
+    
     /**
-     * Returns the observable to use to be notified of change on the current history.
+     * Register an handler to be notified when the current history changes.
      * 
-     * @return {EventEmitter<MarketHistoryEntry[]>}
+     * @param handler The handler to execute on history change
+     * @return {Subscription} the associated emitter subscription to unsubscribe.
      */
-    getHistory() : Observable<MarketHistoryEntry[]> {
-        return this.bus;
+    subscribeToHistoryChanges(handler : HistoryChangeHandler) : Subscription {
+        return this.bus.subscribe(handler);
     }
 
+    /**
+     * Enabled real-time data refresh if currently disabled.
+      */
     enableRealTime() : void {
         if(!this.realTimeEnabled) {
-            this.startRealTimeFetch();
+            this.startFetchTimeout();
             this.realTimeEnabled = true;
         }
     }
 
+    /**
+     * Disable real-time data refresh is currently enabled.
+     */
     disableRealTime() : void {
-        this.realTimeEnabled = false;
+        if(this.realTimeEnabled) {
+            clearTimeout(this._timeoutId);
+            this.realTimeEnabled = false;
+        }
     }
 
+    /**
+     * @return {boolean} true if realTime is enabled, false otherwise.
+     */
     isRealTimeEnabled() : boolean {
         return this.realTimeEnabled;
     }
-
-    private startRealTimeFetch() : void {
-        setTimeout(() => {
+    
+    private startFetchTimeout() : void {
+        this._timeoutId = setTimeout(() => {
             this.performFetch();
             if(this.realTimeEnabled) {
-                this.startRealTimeFetch();
+                this.startFetchTimeout();
             }
         }, FETCH_INTERVAL);
     }

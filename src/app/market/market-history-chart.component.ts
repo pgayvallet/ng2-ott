@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as _ from "lodash";
 import * as Highcharts from "highcharts";
 
 import { MarketHistoryState } from "./market-history-state.service";
 import { MarketHistoryEntry } from "./market-history.model";
-
+import { Subscription } from "rxjs/Rx";
 
 
 @Component({
@@ -15,16 +15,23 @@ import { MarketHistoryEntry } from "./market-history.model";
         </div>
     `,
 })
-export class MarketHistoryChartComponent implements OnInit {
+export class MarketHistoryChartComponent implements OnInit, OnDestroy {
 
     chartConfig : Highcharts.Options;
     chartSeries : any;
 
-    constructor(private state : MarketHistoryState) {}
+    private subscriptions : Subscription = new Subscription();
 
-    ngOnInit(): void {
-        this.state.getHistory().subscribe(history => this.onHistoryChange(history));
+    constructor(private state : MarketHistoryState) {
+    }
+
+    ngOnInit() : void {
+        this.subscriptions.add(this.state.subscribeToHistoryChanges(history => this.onHistoryChange(history)));
         this.chartConfig = this.getChartConfig();
+    }
+
+    ngOnDestroy() : void {
+        this.subscriptions.unsubscribe();
     }
 
     private onHistoryChange(history : MarketHistoryEntry[]) {
@@ -32,12 +39,12 @@ export class MarketHistoryChartComponent implements OnInit {
         let series = [];
         stockNames.forEach(stockName => {
             series.push({
-                id   : stockName,
-                name : stockName,
-                data : history.map(entry => {
+                id: stockName,
+                name: stockName,
+                data: history.map(entry => {
                     return {
-                        x : entry.timestamp,
-                        y : entry.stocks[stockName]
+                        x: entry.timestamp,
+                        y: entry.stocks[stockName]
                     };
                 })
             });
@@ -47,17 +54,17 @@ export class MarketHistoryChartComponent implements OnInit {
 
     private getChartConfig() : Highcharts.Options {
         return {
-            chart : {
-                type : "line",
-                width : null
+            chart: {
+                type: "line",
+                width: null
             },
-            title : null,
-            xAxis : {
-                type : "datetime",
-                crosshair : true
+            title: null,
+            xAxis: {
+                type: "datetime",
+                crosshair: true
             },
-            tooltip : {
-                shared : true
+            tooltip: {
+                shared: true
             }
         };
     }
