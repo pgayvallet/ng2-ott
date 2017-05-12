@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { MarketHistoryService } from "./mkt-history.service";
 
+require('./mkt-history-page.component.scss');
+
 /**
  * Root component for the market history page.
  */

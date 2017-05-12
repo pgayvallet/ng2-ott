@@ -6,6 +6,7 @@ import { MarketHistoryService } from "./mkt-history.service";
 import { MarketHistoryEntry } from "./mkt-history.model";
 import { Subscription } from "rxjs/Rx";
 
+require('./mkt-history-chart.component.scss');
 
 @Component({
     selector: 'mkt-history-chart',

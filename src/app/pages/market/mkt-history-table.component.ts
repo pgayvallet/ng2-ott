@@ -5,6 +5,8 @@ import * as _ from "lodash";
 import { MarketHistoryService } from "./mkt-history.service";
 import { MarketHistoryEntry } from "./mkt-history.model";
 
+require('./mkt-history-table.component.scss');
+
 @Component({
     selector: 'mkt-history-table',
     templateUrl: './mkt-history-table.component.html',

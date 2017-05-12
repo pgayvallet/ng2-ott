@@ -1,0 +1,14 @@
+@import "~styles/colors.scss";
+
+
+mkt-history-chart {
+  display: block;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+
+  sp-highchart {
+    display: block;
+    border: solid 1px $BLACK;
+    overflow: hidden;
+  }
+
+}

@@ -24,7 +24,11 @@ module.exports = {
         'inline-source-map',
 
     resolve: {
-        extensions: ['.webpack.js', '.web.js', '.ts', '.js', '.scss'],
+        extensions: ['.webpack.js', '.web.js', '.ts', '.js'],
+        
+        alias : {
+            styles : path.resolve(__dirname, "./src/app/core/styles/common")
+        }
     },
 
     plugins: plugins,
@@ -35,7 +39,7 @@ module.exports = {
             "/api" : {
                 target : "http://localhost:8000"
             }
-        },
+        }
     },
 
     module: {
@@ -43,7 +47,7 @@ module.exports = {
             loaders.ts_JiT,
             loaders.html,
             loaders.sass,
-            loaders.file,
-        ],
-    },
+            loaders.file
+        ]
+    }
 };

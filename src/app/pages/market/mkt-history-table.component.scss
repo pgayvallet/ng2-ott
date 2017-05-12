@@ -1,0 +1,42 @@
+@import "~styles/colors.scss";
+
+
+mkt-history-table {
+  display: block;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+
+  .sp-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: $WHITE;
+    border: solid 1px $BLACK;
+
+    .sp-table-row {
+      display: table-row;
+    }
+
+    .sp-table-cell {
+      display: table-cell;
+      border: solid 1px black;
+      vertical-align: middle;
+    }
+
+    .stockname-cell {
+      padding: 0 5px;
+    }
+
+    .sp-table-header {
+
+      > .sp-table-cell {
+        text-align: center;
+        padding: 5px 0;
+        background-color: $BLUE_MAIN;
+        color: $WHITE;
+      }
+
+    }
+
+  }
+
+}

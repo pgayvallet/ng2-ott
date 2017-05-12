@@ -1,48 +1,12 @@
+@import "~styles/colors.scss";
 
+@import "./app/core/styles/base/reset.scss";
 
 body {
   background-color: lightgrey;
+  padding: 10px;
 }
 
 * {
   box-sizing: border-box;
-}
-
-
-sp-highchart {
-  display: block;
-}
-
-
-.sp-table {
-  display: table;
-  width: 100%;
-  border-collapse: collapse;
-
-  .sp-table-row {
-    display: table-row;
-  }
-
-  .sp-table-cell {
-    display: table-cell;
-  }
-
-  .sp-table-header {
-
-    > .sp-table-cell {
-      text-align: center;
-      padding: 5px 0;
-    }
-
-  }
-
-
-}
-
-
-.sp-editable-cell {
-  input {
-    width: 100%;
-    padding: 0.2em 0.3em;
-  }
 }

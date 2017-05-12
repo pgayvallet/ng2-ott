@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { keyCodes } from "../../core/utils/keyCodes";
+import { MarketStockValues } from "./mkt-history.model";
 
+require('./mkt-history-table-cell.component.scss');
 
 @Component({
     selector: 'mkt-history-table-cell',
@@ -8,16 +10,18 @@ import { keyCodes } from "../../core/utils/keyCodes";
 })
 export class MarketHistoryTableCellComponent {
 
-    @Input() set value(value : number) {
-        this.originalValue = value.toString();
+    @Input() 
+    set value(value : MarketStockValues) {
+        this._value = value;
         if(!this.editing) {
-            this.inputValue = this.originalValue;
+            this.inputValue = (value.manual !=null ? value.manual : value.original).toString();
         }
     };
 
-    @Output() onValueUpdated : EventEmitter<number> = new EventEmitter<number>();
+    @Output() 
+    onValueUpdated : EventEmitter<number> = new EventEmitter<number>();
 
-    private originalValue : string;
+    _value : MarketStockValues;
 
     editing : boolean = false;
     inputValue : string = "";
@@ -31,7 +35,9 @@ export class MarketHistoryTableCellComponent {
 
     onBlur() {
         this.editing = false;
-        this.emitValueChange();
+        if(this.parseInputValue() != this._value.original) {
+            this.emitValueChange();
+        }
     }
 
     onKeyDown($event : KeyboardEvent) {
@@ -47,13 +53,16 @@ export class MarketHistoryTableCellComponent {
         }
     }
 
-    private restoreValue() {
-        this.inputValue = this.originalValue;
+    private parseInputValue() : number {
+        return parseFloat(this.inputValue);
+    }
 
+    private restoreValue() {
+        this.inputValue = this._value.original + "";
     }
 
     private emitValueChange() {
-        this.onValueUpdated.emit(parseFloat(this.inputValue + ""));
+        this.onValueUpdated.emit(this.parseInputValue());
     }
 
 }

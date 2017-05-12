@@ -1,0 +1,22 @@
+@import "~styles/colors.scss";
+
+
+mkt-history-table-cell {
+
+  .sp-editable-cell {
+    input {
+      width: 100%;
+      padding: 0.5em 0.3em;
+      border-color: transparent;
+    }
+
+    &.manual {
+      input {
+        border-color: $BLUE_OVER;
+      }
+
+    }
+
+  }
+
+}

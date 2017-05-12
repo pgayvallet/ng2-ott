@@ -1,4 +1,4 @@
-<div class="sp-editable-cell">
+<div class="sp-editable-cell" [ngClass]="{ manual : _value.manual != null }">
     <input [(ngModel)]="inputValue"
            (focus)="onFocus()"
            (keydown)="onKeyDown($event)"
