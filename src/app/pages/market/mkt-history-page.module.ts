@@ -3,7 +3,7 @@ import { HttpModule } from "@angular/http";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 
-import { ChartModule } from "../core/chart/chart.module";
+import { ChartModule } from "../../core/chart/chart.module";
 
 import { MarketHistoryService } from "./mkt-history.service";
 import { MarketHistoryState } from "./mkt-history-state.service"

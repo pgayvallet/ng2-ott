@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 
-import { MarketPageModule } from "./market/mkt-history-page.module";
+import { MarketPageModule } from "./pages/market/mkt-history-page.module";
 import { AppComponent } from './app.component';
 
 @NgModule({

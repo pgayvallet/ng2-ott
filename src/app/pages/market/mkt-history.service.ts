@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Rx';
 import * as _ from "lodash";
 
 import { MarketHistoryEntry } from "./mkt-history.model";
-import { searchParams } from "../core/utils/http-utils";
+import { searchParams } from "../../core/utils/http-utils";
 
 @Injectable()
 export class MarketHistoryService {

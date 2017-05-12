@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { keyCodes } from "../core/utils/keyCodes";
+import { keyCodes } from "../../core/utils/keyCodes";
 
 
 @Component({
