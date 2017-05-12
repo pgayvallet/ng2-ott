@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { MarketHistoryState } from "./market-history-state.service";
+import { MarketHistoryState } from "./mkt-history-state.service";
 
 /**
  * Root component for the market history page.
  */
 @Component({
     selector: 'mkt-page',
-    templateUrl: './market-history-page.component.html'
+    templateUrl: './mkt-history-page.component.html'
 })
 export class MarketHistoryPageComponent implements OnInit, OnDestroy {
 

@@ -1,12 +1,12 @@
-import {Component, Input, Output, EventEmitter } from '@angular/core';
-import {keyCodes} from "./utils/keyCodes";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { keyCodes } from "../core/utils/keyCodes";
 
 
 @Component({
-    selector: 'sp-editable-cell',
-    templateUrl: './editable-cell.component.html',
+    selector: 'mkt-history-table-cell',
+    templateUrl: './mkt-history-table-cell.component.html',
 })
-export class EditableCellComponent {
+export class MarketHistoryTableCellComponent {
 
     @Input() set value(value : number) {
         this.originalValue = value.toString();

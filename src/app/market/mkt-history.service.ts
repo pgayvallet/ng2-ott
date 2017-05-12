@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import * as _ from "lodash";
 
-import { MarketHistoryEntry } from "./market-history.model";
+import { MarketHistoryEntry } from "./mkt-history.model";
 import { searchParams } from "../core/utils/http-utils";
 
 @Injectable()

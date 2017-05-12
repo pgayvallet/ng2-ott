@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as _ from "lodash";
 import * as Highcharts from "highcharts";
 
-import { MarketHistoryState } from "./market-history-state.service";
-import { MarketHistoryEntry } from "./market-history.model";
+import { MarketHistoryState } from "./mkt-history-state.service";
+import { MarketHistoryEntry } from "./mkt-history.model";
 import { Subscription } from "rxjs/Rx";
 
 

@@ -2,8 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs/Rx';
 import * as _ from "lodash";
 
-import { MarketHistoryEntry } from "./market-history.model";
-import { MarketHistoryService } from "./market-history.service";
+import { MarketHistoryEntry } from "./mkt-history.model";
+import { MarketHistoryService } from "./mkt-history.service";
 
 const FETCH_INTERVAL = 1000;
 const HISTORY_LENGTH = 20;

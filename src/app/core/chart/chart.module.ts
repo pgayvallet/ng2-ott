@@ -11,5 +11,5 @@ import { HighchartComponent } from "./highchart.component";
         HighchartComponent
     ]
 })
-export class CoreChartModule {
+export class ChartModule {
 }

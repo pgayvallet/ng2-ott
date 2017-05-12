@@ -2,12 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from "rxjs/Rx";
 import * as _ from "lodash";
 
-import { MarketHistoryState } from "./market-history-state.service";
-import { MarketHistoryEntry } from "./market-history.model";
+import { MarketHistoryState } from "./mkt-history-state.service";
+import { MarketHistoryEntry } from "./mkt-history.model";
 
 @Component({
     selector: 'mkt-history-table',
-    templateUrl: './market-history-table.component.html',
+    templateUrl: './mkt-history-table.component.html',
 })
 export class MarketHistoryTableComponent implements OnInit, OnDestroy {
 
