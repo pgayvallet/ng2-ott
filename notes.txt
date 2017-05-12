@@ -1,0 +1,3 @@
+
+
+Dynamic routing : http://stackoverflow.com/questions/42928030/is-it-possible-to-build-add-routes-dynamically-in-angular-2
