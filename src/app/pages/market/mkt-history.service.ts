@@ -144,7 +144,7 @@ export class MarketHistoryService {
         }
         let oldPart = _.takeRight(oldHistory, HISTORY_LENGTH - offset);
         let newPart = _.takeRight(newHistory, offset);
-        return oldPart.concat(newPart);
+        return [...oldPart, ...newPart];
     }
 
 }
